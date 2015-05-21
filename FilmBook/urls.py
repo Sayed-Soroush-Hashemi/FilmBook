@@ -19,11 +19,11 @@ from django.contrib import admin
 import users.urls
 
 urlpatterns = [
-    url(r'^accounts', include(users.urls), name='users_urls'),
+    url(r'^accounts/', include(users.urls), name='users_urls'),
 
-    url(r'^user/(\d+)', 'film_book.views.show_profile')
-    url(r'^movie/(\d+)', 'film_book.views.show_movie')
-    url(r'^post/(\d+)', 'film_book.views.show_post')
+    # url(r'^user/(\d+)', 'film_book.views.show_profile'),
+    url(r'^movie/(\d+)', 'film_book.views.show_movie'),
+    url(r'^post/(\d+)', 'film_book.views.show_post'),
 
     url(r'^admin/', include(admin.site.urls)),
 ]
