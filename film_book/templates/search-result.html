@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/search.css">
+<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">
+<script lang="javascript" type="text/javascript" src="js/search-result.js"></script>
+</head>
+
+<body>
+	<header>
+		<div id="search">
+			<form action="" method="get">
+				<input type="text" id="searchtext"
+					value="Leon the Professional natalie portman" />
+				<button id="searchbutton">Search</button>
+			</form>
+		</div>
+		<ul id="header-menu">
+			<li title="Profile"><img id="userImage" alt="user Image"
+				src="./images/userImage.jpg" /> Profile</li>
+			<li title="Timeline">Home</li>
+			<li title="Settings"><i class="fa fa-cogs fa-2x"></i></li>
+			<li title="Notifications"><i class="fa fa-bell fa-2x"></i></li>
+			<li title="logout"><i class="fa fa-sign-out fa-2x"></i></li>
+		</ul>
+	</header>
+	<div id="gradient"></div>
+	<aside>
+		<section id="suggested-movies">
+			<span> Your Friends Watch </span> <br>
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+		</section>
+
+		<section id="suggested-users">
+			<span> You Might Know </span> <br>
+			<figure>
+				<img src="images/img.png">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+		</section>
+
+		<section id="popular-movies">
+			<span> Movies Being Watched Now </span> <br>
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="images/img.png">
+				<a href=""> This is a Movie </a>
+			</figure>
+		</section>
+	</aside>
+	<section id="main">
+		<div id="movies-tab" class="tab" onclick="showMoviesTab(); hidePeopleTab();">Movies</div>
+		<div id="people-tab" class="tab" onclick="showPeopleTab(); hideMoviesTab();">People</div>
+
+		<article id="movie-result-tab" class="movie-result">
+			<img src="images/leon.jpg" />
+			<div class="info">
+				<h1 class="movie-title">Leon the Professional</h1>
+				<div class="rating">
+					<i class="fa fa-star fa-2x"> </i> <i class="fa fa-star fa-2x">
+					</i> <i class="fa fa-star fa-2x"> </i> <i class="fa fa-star fa-2x">
+					</i> <i class="fa fa-star fa-2x"> </i>
+				</div>
+				<div class="director">Directed by: Luc Besson</div>
+			</div>
+			<section class="posts">
+				<h2>Top Posts</h2>
+				<div class="post">
+					<img src="images/userImage.jpg">
+					<h3>Alireza Nasri</h3>
+					<div class="post-content">This is a text. This is a text.
+						This is a text. This is a text. This is a text. This is a text.</div>
+				</div>
+				<br />
+				<div class="post">
+					<img src="images/userImage.jpg">
+					<h3>Alireza Nasri</h3>
+					<div class="post-content">This is a text. This is a text.
+						This is a text. This is a text. This is a text. This is a text.</div>
+				</div>
+			</section>
+		</article>
+
+		<article id="people-result-tab" class="user-result">
+			<img src="images/userImage.jpg" />
+			<h2>Alireza Nasri</h2>
+			<span> Age: 19 </span>
+		</article>
+	</section>
+	<script lang="javascript" type="text/javascript">showMoviesTab(); hidePeopleTab();</script>
+</body>
+</html>

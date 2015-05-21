@@ -1,0 +1,137 @@
+<!doctype html />
+<html>
+  <head>
+    {% load static %}
+    <title> Post </title>
+    <link rel="stylesheet" href="{% static 'css/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    <script src="{% static 'js/general.js' %}"> </script>
+    <script type="text/javascript" src="{% static 'js/post.js' %}"></script>
+  </head>
+  <body>
+    <header>
+      <div id="search">
+	<form action="" method="get">
+	  <input type="text" id="searchtext" />
+	  <button id="searchbutton">Search</button>
+	</form>
+      </div>
+      <ul id="header-menu">
+	<li title="Profile"><img id="userImage" alt="user Image"
+				 src="./images/userImage.jpg" /> Profile</li>
+	<li title="Timeline">Home</li>
+	<li title="Settings"><i class="fa fa-cogs fa-2x"></i></li>
+	<li title="Notifications"><i class="fa fa-bell fa-2x"></i></li>
+	<li title="logout"><i class="fa fa-sign-out fa-2x"></i></li>
+      </ul>
+    </header>
+    <div id="gradient"></div>
+    <aside>
+      <section id="suggested-movies">
+	<span> Your Friends Watch </span> <br>
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+      </section>
+
+      <section id="suggested-users">
+	<span> You Might Know </span> <br>
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+      </section>
+
+      <section id="popular-movies">
+	<span> Movies Being Watched Now </span> <br>
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+      </section>
+    </aside>
+    <section id="container">
+      <article class="post">
+	<figure class="movie-poster">
+	  <img src="/static/{{post.movie.image.url}}">
+	  <a href="">{{post.movie.name}} ({{post.movie.release_date.year}})</a>
+	</figure>
+
+	<section class="review">
+	  <img src="/static/{{post.poster.image.url}}"> <span class="username">{{post.poster.nickname}}</span>  
+	  <span class="score"> {% for i in rate %} <i class="fa fa-star fa-2x"> </i> {% endfor %}
+	  </span>
+	  <div class="post-content">{{post.review}}</div>
+	</section>
+	<span id="post-date"> {{post.pub_date}}</span>
+	<section class="comments">
+	  <span> Comments </span>
+	  {% for comment in comments %}
+	  <div class="comment">
+	    <div class="commenter-username">{{comment.commenter.nickname}}</div>
+	    <div class="comment-content">{{comment.content}}</div>
+	    <span class="comment-date"> {{comment.pub_date}} </span>
+	  </div>
+	  <br />
+	  {% endfor %}
+
+	  <div class="new-comment">
+	    <form action="" method="post">
+	      <textarea class="new-comment-content"
+			placeholder="Comment on Post ..." rows="1"></textarea>
+	      <button onclick="addComment(this); return false">Submit</button>
+	    </form>
+	  </div>
+	</section>
+
+      </article>
+
+
+    </section>
+  </body>
+</html>

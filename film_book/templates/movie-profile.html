@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/general.css' %}">
+<link rel="stylesheet" href="{% static 'css/movie-profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/fontawesome/css/font-awesome.min.css' %}">
+<script type="text/javascript" lang="javascript" src="{% static 'js/movie-profile.js' %}"></script>
+</head>
+
+<body>
+
+	<header>
+		<div id="search">
+			<form action="" method="get">
+				<input type="text" id="searchtext" />
+				<button id="searchbutton">Search</button>
+			</form>
+		</div>
+		<ul id="header-menu">
+		  <li title="Profile"><img id="userImage" alt="user Image"
+					   src="{% static './images/userImage.jpg' %}" /> Profile</li>
+			<li title="Timeline">Home</li>
+			<li title="Settings"><i class="fa fa-cogs fa-2x"></i></li>
+			<li title="Notifications"><i class="fa fa-bell fa-2x"></i></li>
+			<li title="logout"><i class="fa fa-sign-out fa-2x"></i></li>
+		</ul>
+	</header>
+	<div id="gradient"></div>
+	<aside>
+		<section id="suggested-movies">
+			<span> Your Friends Watch </span> <br>
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+		</section>
+
+		<section id="suggested-users">
+			<span> You Might Know </span> <br>
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> Alireza Nasri </a>
+			</figure>
+
+		</section>
+
+		<section id="popular-movies">
+			<span> Movies Being Watched Now </span> <br>
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+			<figure>
+				<img src="{% static 'images/img.png' %}">
+				<a href=""> This is a Movie </a>
+			</figure>
+
+		</section>
+	</aside>
+
+	<section id="movie-profile">
+	
+		<div id="askForComment">
+			<img id="movie-poster" src="static/{{movie.image.url}}" />
+			<div class="movie-title-for-comment">Leon the Professional</div>
+			<div id="comment-rating" class="movie-rating-for-comment">8 stars</div>
+			<form action="" method="post">
+				<input type="text" name="comment" placeholder="write a comment ..."/>
+				<button name="ignore" type="button" value="ignore" onclick="hideAskForComment()">ignore</button>
+				<button name="submit" type="submit" value="submit" oncilck="hideAskForComment()">submit</button>
+			</form>
+		</div>
+		<img id="movie-poster" src="/static/{{movie.image.url}}" />
+		<div id="info">
+			<h1 id="movie-title">{{movie.name}}({{movie.release_date.year}})</h1>
+			<div id="user-rating">			
+			  {% if rate %}
+			  {% for i in rate %}
+			  Your Rating <i class="fa fa-star fa-1x"> </i>
+			  {% endfor %}
+			  {% else %}
+			  Rate This Movie {% for i in range10 %} <i class="fa fa-star fa-1x" onclick="askForComment(event, {{i}})"></i>
+			  {% endfor%} {% endif %}
+			</div>
+			<div id="rating">
+				<span> Average Rating: </span> {% for i in av_rate %} <i class="fa fa-star fa-2x"> </i> {% endfor %}
+			</div>
+			<br> <a href="{{movie.imdb_link}}"> See
+				IMDb Profile </a>
+		</div>
+		<div id="plot">{{movie.plot}}</div>
+		<section id="cast-crew">
+			<h1>Cast</h1>
+			<h1>Crew</h1>
+			<article id="cast">
+			  {% for role in cast %}
+			  <figure>
+			    <img src="/static/{{role.image.url}}" />
+			    <h2>{{role.crew.name}}</h2>
+			    <h3>{{role.role_name}}</h3>
+			  </figure>
+			  {% endfor %}
+			</article>
+			<article id="crew">
+			  {% for role in crew %}
+			  <figure>
+			    <img src="/static/{{role.image.url}}" />
+			    <h2>{{role.crew.name}}</h2>
+			    <h3>{{role.role_name}}</h3>
+			  </figure>
+			  {% endfor %}
+			</article>
+		</section>
+	</section>
+</body>
+</html>

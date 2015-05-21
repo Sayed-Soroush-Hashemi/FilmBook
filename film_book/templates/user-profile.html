@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/user-profile.css" type="text/css" />
+    <link rel="stylesheet" href="css/general.css" type="text/css" />
+    <title>User Profile</title>
+  </head>
+  <body>
+    <header>
+      <div id="search">
+	<form action="" method="get">
+	  <input type="text" id="searchtext" />
+	  <button id="searchbutton">Search</button>
+	</form>
+      </div>
+      <ul id="header-menu">
+	<li title="Profile"><img id="userImage" alt="user Image"
+				 src="./images/userImage.jpg" /> Profile</li>
+	<li title="Timeline">Home</li>
+	<li title="Settings"><i class="fa fa-cogs fa-2x"></i></li>
+	<li title="Notifications"><i class="fa fa-bell fa-2x"></i></li>
+	<li title="logout"><i class="fa fa-sign-out fa-2x"></i></li>
+      </ul>
+    </header>
+    <div id="gradient"></div>
+    <aside>
+      <section id="suggested-movies">
+	<span> Your Friends Watch </span> <br>
+	<figure>
+	  <img src="images/img.png"/>
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+      </section>
+
+      <section id="suggested-users">
+	<span> You Might Know </span> <br>
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> Alireza Nasri </a>
+	</figure>
+
+      </section>
+
+      <section id="popular-movies">
+	<span> Movies Being Watched Now </span> <br>
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+	<figure>
+	  <img src="images/img.png">
+	  <a href=""> This is a Movie </a>
+	</figure>
+
+      </section>
+    </aside>
+
+    <section id="user-profile">
+      <div id="user-image">
+      <img id="user-image" src="images/userImage.jpg" alt="User Image" /> </div>
+      <div id="info">
+	<div id="name"> Alireza Nasri </div>
+	<div id="username"> Known as: AlirezaN </div>
+	<div id="follows"> Follows: 6 </div>
+	<div id="followers"> Followed by: 9 </div>
+      </div>
+      <div id="buttons">
+	<button id="edit-profile-button"> Edit Profile </button>
+	<button id="follow-button"> Follow </button>
+      </div>
+    </section>
+    <section id="posts">
+      <article class="post">
+	<figure class="movie-poster">
+	  <img src="images/leon.jpg" 
+	       onmousemove="moveMovieDetails(event, this)"
+	       onmouseover="showMovieDetails(this)"
+	       onmouseout="hideMovieDetails(this)" />
+	  <span class="movie-detail-box">Director: some one <br> average
+	    point: 8.7</span>
+	  <a href=""> Leon the Proffessional </a>
+	</figure>
+
+	<section class="review">
+	  <img src="images/userImage.jpg"> <span class="username">
+	    Alireza Nasri </span> <span class="score"> <i
+							  class="fa fa-star fa-2x"> </i> <i class="fa fa-star fa-2x"> </i> <i
+															      class="fa fa-star fa-2x"> </i> <i class="fa fa-star fa-2x"> </i> <i
+																								  class="fa fa-star fa-2x"> </i>
+	  </span>
+	  <div class="post-content">This is a text. This is a text. This
+	    is a text. This is a text. This is a text. This is a text. This is
+	    a text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text.</div>
+	</section>
+
+	<section class="comments">
+	  <span> Comments </span>
+	  <div class="comment">
+	    <div class="commenter-username">Alireza Nasri</div>
+	    <div class="comment-content">This is a text. This is a text.
+	      This is a text. This is a text. This is a text. This is a text.
+	      This is a text. This is a text. This is a text.</div>
+	    <span class="comment-date"> 28/10/2015 </span>
+	  </div>
+	  <br />
+	  <div class="comment">
+	    <div class="commenter-username">Alireza Nasri</div>
+	    <div class="comment-content">This is a text. This is a text.
+	      This is a text. This is a text. This is a text. This is a text.
+	      This is a text. This is a text. This is a text.</div>
+	    <span class="comment-date"> 28/10/2015 </span>
+	  </div>
+	  <br />
+	  <div class="new-comment">
+	    <textarea class="new-comment-content"
+		      placeholder="Comment on Post ..." rows="1"></textarea>
+	    <button onclick="addComment(this)">Submit</button>
+	  </div>
+	</section>
+	<span id="post-date"> </span>
+      </article>
+    </section>
+  </body>
+</html>

@@ -1,14 +1,23 @@
+from users.models import FBUser
 from django.db import models
 
 class Movie(models.Model):
     name = models.CharField(max_length=100)
     release_date = models.DateTimeField()
     imdb_link = models.CharField(max_length=300)
-    image = models.ImageField(upload_to="images/movies/")
+    image = models.FileField(upload_to="images/movies/")
     plot = models.TextField()
 
     def __str__(self):
         return "{}({})".format(self.name, self.release_date)
+
+class Rate(models.Model):
+    movie = models.ForeignKey(Movie)
+    user = models.ForeignKey(FBUser)
+    rate = models.IntegerField()
+    
+    def __str__(self):
+        return "{}".format(self.rate)
 
 class Post(models.Model):
     movie = models.ForeignKey(Movie)
@@ -24,12 +33,13 @@ class Comment(models.Model):
     commenter = models.ForeignKey(FBUser)
     post = models.ForeignKey(Post)
     content = models.TextField()
+    pub_date = models.DateTimeField()
 
     def __str__(self):
         return "{} says: {}".format(self.commenter, self.content)
 
 class Crew(models.Model):
-    image = models.ImageField(upload_to="images/crew/")
+    image = models.FileField(upload_to="images/crew/")
     name = models.CharField(max_length=100)
     imdb_link  = models.CharField(max_length=300)
     
@@ -45,10 +55,4 @@ class Role(models.Model):
     def __str__(self):
         return self.name
 
-class Rate(models.Model):
-    movie = models.ForeignKey(Movie)
-    user = models.ForeignKey(FBUser)
-    rate = models.IntegerField()
-    
-    def __str__(self):
-        return self.rate
+

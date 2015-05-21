@@ -1,18 +1,22 @@
 from django.shortcuts import render
-from film_book.models import Movie, Post, Comment, Crew, Role
+from film_book.models import Movie, Post, Comment, Crew, Role, Rate
 from users.models import FBUser
 
 def show_movie(request, movie_id):
-    movie = Movie.objects.filter(id=movie_id)
+    movie = Movie.objects.get(id=movie_id)
     cast = Role.objects.filter(movie=movie).filter(is_cast=True)
     crew = Role.objects.filter(movie=movie).filter(is_cast=False)
     rates = Rate.objects.filter(movie=movie)
     av_rate = 0
     for rate in rates:
         av_rate += rate.rate
-    av_rate /= len(rates)
     try:
-        rate = Rate.objects.get(movie=movie, user=request.user).rate
+        av_rate /= len(rates)
+    except:
+        pass
+    av_rate = range(av_rate)
+    try:
+        rate = range(Rate.objects.get(movie=movie, user=request.user).rate)
     except:
         rate = None        
     
@@ -20,17 +24,19 @@ def show_movie(request, movie_id):
         'movie': movie,
         'av_rate': av_rate,
         'rate': rate,
+	'range10': range(10),
         'cast': cast,
         'crew': crew,
     })
 
 def show_post(request, post_id):
-    post = Post.objects.filter(id=post_id)
+    post = Post.objects.get(id=post_id)
     comments = Comment.objects.filter(post=post)
     
     return render(request, 'post.html', {
         'post': post,
-        'comment': comment,
+        'comments': comments,
+	'rate': range(post.rate.rate)
     })
 
 def search_results(request):
