@@ -3,10 +3,12 @@ from django.core.urlresolvers import reverse
 from django.contrib import auth
 
 from .models import FBUser
-from .forms import RegisterationModelForm
+from .forms import RegisterationModelForm, EditProfileModelForm
 
 
 def user_login(request):
+    if request.user.is_authenticated():
+        return redirect(reverse('user_edit_profile'))
     if request.method == "GET":
         return render(request, 'user_login.html')
     if request.method == 'POST':
@@ -17,15 +19,19 @@ def user_login(request):
         if user is None:
             return redirect(reverse('user_login') + "?login=fail")
         auth.login(request, user)
-        return redirect(reverse('home') + "?login=success")
+        return redirect(reverse('user_edit_profile') + "?login=success")
 
 
 def user_logout(request):
-    auth.logout(request.user)
+    if request.user.is_anonymous():
+        return redirect(reverse('user_login'))
+    auth.logout(request)
     return redirect(reverse('user_login') + "?logout=success")
 
 
 def user_register(request):
+    if request.user.is_authenticated():
+        return redirect(reverse('user_edit_profile'))
     if request.method == "GET":
         context = {
             'form': RegisterationModelForm(),
@@ -46,4 +52,26 @@ def user_register(request):
 
 
 def edit_profile(request):
-    pass
+    if request.user.is_anonymous():
+        return redirect(reverse('user_login'))
+    request.user = FBUser.objects.get(username=request.user.username)
+    if request.method == "GET":
+        context = {
+            'form': EditProfileModelForm(instance=request.user),
+        }
+        return render(request, 'edit_profile.html', context)
+    if request.method == "POST":
+        print("here3")
+        form = EditProfileModelForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            print("here2")
+            form.save(commit=True)
+            context = {
+                'form': form,
+            }
+            return render(request, 'edit_profile.html', context)
+        else:
+            context = {
+                'form': form,
+            }
+            return render(request, 'edit_profile.html', context)

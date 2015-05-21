@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 import django.contrib.auth.models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -16,20 +16,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FBUser',
             fields=[
-
-                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, serialize=False, primary_key=True, to=settings.AUTH_USER_MODEL)),
-                ('nickname', models.CharField(max_length=100, null=True, blank=True)),
-                ('birthday', models.DateField(null=True, blank=True)),
-
-                ('user_ptr', models.OneToOneField(auto_created=True, primary_key=True, serialize=False, parent_link=True, to=settings.AUTH_USER_MODEL)),
-                ('nickname', models.CharField(blank=True, max_length=100, null=True)),
+                ('user_ptr', models.OneToOneField(serialize=False, to=settings.AUTH_USER_MODEL, auto_created=True, primary_key=True, parent_link=True)),
+                ('nickname', models.CharField(max_length=100, blank=True, null=True)),
                 ('birthday', models.DateField(blank=True, null=True)),
-                ('image', models.ImageField(blank=True, upload_to='users/images', null=True)),
-
+                ('image', models.FileField(blank=True, upload_to='users/images', null=True)),
             ],
             options={
-                'verbose_name': 'user',
                 'abstract': False,
+                'verbose_name': 'user',
                 'verbose_name_plural': 'users',
             },
             bases=('auth.user',),

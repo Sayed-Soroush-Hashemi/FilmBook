@@ -15,8 +15,8 @@ class RegisterationModelForm(ModelForm):
         model = FBUser
         fields = ['first_name', 'last_name', 'nickname', 'birthday', 'username', 'password', 'email', 'image']
         labels = {
-            'first_name': 'Fristname',
-            'last_name': 'Lastname',
+            'first_name': 'First name',
+            'last_name': 'Last name',
             'nickname': 'Nickname',
             'birthday': 'Birthday',
             'username': 'Username',
@@ -26,5 +26,24 @@ class RegisterationModelForm(ModelForm):
         }
         widgets = {
             'password': forms.PasswordInput(),
+            'birthday': MyDateInput(),
+        }
+
+
+class EditProfileModelForm(ModelForm):
+    class Meta:
+        model = FBUser
+        fields = ['first_name', 'last_name', 'nickname', 'birthday', 'email', 'image']
+        labels = {
+            'first_name': 'First name',
+            'last_name': 'Last name',
+            'nickname': 'Nickname',
+            'birthday': 'Birthday',
+            'username': 'Username',
+            'password': 'Password',
+            'email': 'Email',
+            'image': 'Your Image',
+        }
+        widgets = {
             'birthday': MyDateInput(),
         }
