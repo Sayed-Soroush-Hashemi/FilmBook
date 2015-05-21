@@ -13,7 +13,7 @@ class Movie(models.Model):
 class Post(models.Model):
     movie = models.ForeignKey(Movie)
     poster = models.ForeignKey(FBUser)
-    rate = models.IntegerField(default=0)
+    rate = models.ForeignKey(Rate)
     review = models.TextField()
     pub_date = models.DateTimeField()
 
@@ -40,6 +40,15 @@ class Role(models.Model):
     movie = models.ForeignKey(Movie)
     crew = models.ForeignKey(Crew)
     role_name = models.CharField(max_length=100)
+    is_cast = models.BooleanField()
     
     def __str__(self):
         return self.name
+
+class Rate(models.Model):
+    movie = models.ForeignKey(Movie)
+    user = models.ForeignKey(FBUser)
+    rate = models.IntegerField()
+    
+    def __str__(self):
+        return self.rate
