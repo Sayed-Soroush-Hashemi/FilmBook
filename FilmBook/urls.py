@@ -21,7 +21,11 @@ import users.urls
 urlpatterns = [
     url(r'^accounts/', include(users.urls), name='users_urls'),
 
+<<<<<<< HEAD
     url(r'^user/(\d+)', 'film_book.views.show_profile'),
+=======
+    # url(r'^user/(\d+)', 'film_book.views.show_profile'),
+>>>>>>> 3638d1af1c98c85899d9781dbd657f247ad29798
     url(r'^movie/(\d+)', 'film_book.views.show_movie'),
     url(r'^post/(\d+)', 'film_book.views.show_post'),
 

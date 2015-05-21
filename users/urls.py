@@ -18,7 +18,7 @@ from django.conf.urls import url
 urlpatterns = [
     url(r'^login$', 'users.views.user_login', name='user_login'),
     url(r'^logout$', 'users.views.user_logout', name='user_logout'),
-    url(r'^register$', 'users.views,user_register', name='user_register'),
+    url(r'^register$', 'users.views.user_register', name='user_register'),
     url(r'^edit_profile$', 'users.views.edit_profile', name='user_edit_profile'),
 
 ]
