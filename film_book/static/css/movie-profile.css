@@ -1,0 +1,180 @@
+#movie-profile{
+    padding: 40px;
+`    width: 850px;
+    margin-left: 100px;
+}
+
+#movie-profile > img{
+    float: left;
+    position: relative;
+    top: 110px;
+    margin: 20px;
+    width: 220px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+#info{
+    width: 800px;
+    text-align: center;
+}
+
+#info > a{
+    text-decoration: none;
+    color: black;
+}
+
+#info > a:hover{
+    color: #0BB;
+}
+
+#movie-title{
+    font-size: 2em; 
+    margin-bottom: 10px;
+}
+
+#user-rating{
+    margin-bottom: 10px;
+}
+
+#rating span{
+    font-size: 2em;
+}
+
+#plot{
+    box-sizing: border-box;
+    width: 800px;
+    text-align: justify;
+    margin-top: 20px;
+    padding-left: 260px;
+}
+
+#cast-crew{
+    width: 850px;
+    height: 420px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 5px;
+    clear: both;
+    margin-top: 20px;
+}
+
+#cast-crew h1{
+    box-sizing: border-box;
+    width: 50%;
+    text-align: center;
+    height: 40px;
+    font-size: 2em;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+#cast, #crew{
+    width: 420px;
+    height: 350px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#cast-crew figure{
+    margin: 0;
+    width: 130px;
+    height: 160px;
+    text-align: center;
+}
+
+#cast-crew img{
+    border: none;
+    margin: 0;
+    width: 130px;
+    height: 160px;
+}
+
+#cast-crew figure{
+    box-sizing: border-box;
+    border-top: none;
+    border-collapse: collapse;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#cast-crew figure h2{
+    line-height: 40px;
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #555;
+    opacity: 0.7;
+    color: white;
+    transition: all 0.4s ease;
+    font-size: 1em;
+}
+
+#cast-crew figure:hover{
+}
+
+#cast-crew figure:hover h2{
+    height: 80px;
+    opacity: 0.9;
+    color: #0BB;
+}
+
+#cast-crew figure:hover h3{
+    height: 40px;
+}
+
+#cast-crew h3{
+    transition: all 0.4s ease;
+    text-align: center;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #0BB;
+    font-size: 0.9em;
+}
+
+#movie-profile > span{
+    float: left;
+}
+
+#askForComment {
+	background-color: WHITE;
+	border-radius: 5px;
+	border: 1px solid BLACK;
+	position: fixed;
+	display: none;
+	z-index: 100;
+}
+#askForComment img {
+	width: 100px;
+	heigh: 100px;
+	display: inline-block;
+}
+#askFocComment .movie-title-for-comment {
+	display: inline-block;
+}
+#askFocComment .movie-rating-for-comment {
+	display: inline-block;
+}

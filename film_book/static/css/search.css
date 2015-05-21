@@ -1,0 +1,120 @@
+#main {
+    position: fixed;
+    width: 60%;
+    height: 90%;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 5px 5px 20px #888;
+    left: 5%;
+    border: 2px solid #099;
+    border-bottom: none;
+}
+
+#main .tab{
+    box-sizing: border-box;
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+    height: 50px;
+    position: absolute;
+    top: -50px;
+    line-height: 50px;
+    left: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: 2px solid #099;
+    border-bottom: none;
+}
+
+#main .tab:nth-child(2){
+    left: 23%;
+}
+
+#main .tab:hover{
+    color: #0CC;
+    border:2px solid #0BB;
+    border-bottom: none;
+}
+
+#main .movie-result{
+    box-sizing: border-box;
+    width: 100%;
+    border-bottom: 2px solid #099;
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.movie-result > img{
+    border-radius: 5px;
+    width: 120px;
+    height: 160px;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.movie-result .info{
+    flex-grow: 2;
+    width: 250px;
+    min-height: 150px;
+    margin-left: 20px;
+}
+
+.info h1{
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.info .rating{
+    margin-bottom: 10px;
+}
+
+.posts{
+    display:inline-block;
+    
+    min-width: 350px;
+    min-height: 150px;
+}
+
+.posts h2{
+    width: 100%;
+    text-align: center;
+}
+
+.post{
+    width: 350px;
+}
+
+.post img{
+    border-radius: 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.post h3{
+    margin: 0;
+}
+
+.user-result{
+        box-sizing: border-box;
+    width: 100%;
+    border-bottom: 2px solid #099;
+    padding: 40px;
+}
+
+.user-result > img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    float: left;
+    margin-right: 20px;
+}
+
+.user-result > h2{
+    
+}

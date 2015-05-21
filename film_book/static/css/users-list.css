@@ -1,0 +1,50 @@
+h1{
+    width: 70%;
+    text-align: center;
+    font-size: 3em;
+    margin: 0;
+}
+
+#main {
+    position: fixed;
+    width: 60%;
+    height: 90%;
+    bottom: 0;
+    left: 5%;
+}
+
+.user{
+    cursor: pointer;
+    border: 2px solid #099;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 45%;
+    float: left;
+    box-shadow: 5px 5px 20px #888;
+    border-radius: 15px;
+    margin: 2%;
+}
+
+.user:hover{
+    color: #0BB;
+}
+
+.user:last-of-type{
+    width: 94%;
+    text-align: center;
+}
+
+.container{
+    text-align: left;
+    height: 100%;
+    width: 300px;
+    display: inline-block;
+}
+
+.user img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    float: left;
+    margin-right: 20px;
+}
