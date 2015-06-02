@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from film_book.models import Movie, Post, Comment, Crew, Role, Rate
 from users.models import FBUser
+from django.core.urlresolvers import reverse
 
 def show_movie(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
@@ -80,4 +81,19 @@ def user_following(request, user_id):
     users = FBUser.objects.filter(followers__contains=user)
     return render(request, 'user-lists.html', {
         'users': users,
+    })
+
+def show_timeline(request):
+    if request.user.is_authenticated() == False:
+        return redirect(reverse('user_edit_profile'))
+    user = request.user
+    posts = Post.objects.all().filter(poster__followers=user)
+#    posts = []
+#    for post in tmpposts:
+#        if post.poster.followers.contains(user):
+#            posts.push(post)
+        
+    return render(request, 'timeline.html', {
+        'posts': posts,
+        'user': user,
     })

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+  </head>
+  
+  <body>
+    <aside>
+    </aside>
+    
+    <section id="container">
+      <article class="box">
+	<section class="details"> 
+	  <img class="user-pic" src="images/user-sample.jpg">
+	  <i class="fa fa-thumbs-o-up"></i><br>
+	  <i class="fa fa-external-link"></i><br>
+	  <i class="fa fa-volume-off"></i><br>
+	  <h2 class="username"> Alireza Nasri </h2>
+	  <h2> Leon the Professional </h2>
+	  <h2> Rating: 3 </h2>
+	</section>
+	<section class="post">This is a text. This is a text. This
+	    is a text. This is a text. This is a text. This is a text. This is
+	    a text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a</section>
+	<section class="comments"> 
+	  <div class="info rot">COMMENTS</div>
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a comm
+	  </div>
+
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
+	  </div>
+
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
+	  </div>
+	</section>
+	<img class="poster" src="images/sample.jpg">
+      </article>
+
+      <article class="box">
+	<section class="details"> 
+	  <img class="user-pic" src="images/user-sample.jpg">
+	  <i class="fa fa-thumbs-o-up"></i><br>
+	  <i class="fa fa-external-link"></i><br>
+	  <i class="fa fa-volume-off"></i><br>
+	  <h2 class="username"> Alireza Nasri </h2>
+	  <h2> Leon the Professional </h2>
+	  <h2> Rating: 3 </h2>
+	</section>
+	<section class="post">This is a text. This is a text. This
+	    is a text. This is a text. This is a text. This is a text. This is
+	    a text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a
+	    text. This is a text. This is a text. This is a text. This is a</section>
+	<section class="comments"> 
+	  <div class="info rot">COMMENTS</div>
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a comm
+	  </div>
+
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
+	  </div>
+
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
+	  </div>
+	</section>
+	<img class="poster" src="images/sample.jpg">
+      </article>
+
+      <article class="box">
+	<section class="details"> </section>
+	<section class="comment"> </section>
+	<img class="poster" src="images/sample.jpg">
+      </article>
+
+      <article class="box">
+	<section class="details"> </section>
+	<section class="comment"> </section>
+	<img class="poster" src="images/sample.jpg">
+      </article>
+
+      <article class="box">
+	<section class="details"> </section>
+	<section class="comment"> </section>
+	<img class="poster" src="images/sample.jpg">
+      </article>
+    </section>
+  </body>
+</html>

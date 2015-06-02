@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+  </head>
+  
+  <body>
+    <aside>
+    </aside>
+    
+    <section id="container">
+      {% for post in posts %}
+      <article class="box">
+	<section class="details"> 
+	  <img class="user-pic" src="{% static 'images/user-sample.jpg' %}">
+	  <i class="fa fa-thumbs-o-up"></i><br>
+	  <i class="fa fa-external-link"></i><br>
+	  <i class="fa fa-volume-off"></i><br>
+	  <h2 class="username"> Alireza Nasri </h2>
+	  <h2> Leon the Professional </h2>
+	  <h2> Rating: 3 </h2>
+	</section>
+	<section class="post">This is a text. This is a text. This
+	  is a text. This is a text. This is a text. This is a text. This is
+	  a text. This is a text. This is a text. This is a text. This is a
+	  text. This is a text. This is a text. This is a text. This is a
+	  text. This is a text. This is a text. This is a text. This is a
+	  text. This is a text. This is a text. This is a text. This is a</section>
+	<section class="comments"> 
+	  <div class="info rot">COMMENTS</div>
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a comm
+	  </div>
+
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
+	  </div>
+
+	  <div class="comment">
+	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
+	  </div>
+	</section>
+	<img class="poster" src="{% static 'images/sample.jpg' %}">
+      </article>
+      {% endfor %}
+    </section>
+  </body>
+</html>
