@@ -34,7 +34,7 @@ class Comment(models.Model):
     commenter = models.ForeignKey(FBUser)
     post = models.ForeignKey(Post)
     content = models.TextField()
-    pub_date = models.DateTimeField(default=datetime.datetime.now())
+    pub_date = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
         return "{} says: {}".format(self.commenter, self.content)

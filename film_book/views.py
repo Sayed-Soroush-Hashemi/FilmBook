@@ -5,6 +5,8 @@ from users.models import FBUser
 from django.core.urlresolvers import reverse
 import json
 from django.http import HttpResponse
+import time, pytz
+from datetime import datetime
 
 def show_movie(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
@@ -103,11 +105,16 @@ def show_timeline(request):
             form = NewPostForm()
     else:
         form = NewPostForm()    
-    user = request.user
+    user = FBUser.objects.get(id=request.user.id)
     posts = Post.objects.all().filter(poster__followers=user)
     comments = []
     for post in posts:
-        comments.append(Comment.objects.all().filter(post=post))
+        comments.append({
+            'post': post,
+            'comment': Comment.objects.all().filter(post=post),
+        })
+    user.lastget = datetime.now().replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Asia/Tehran"))
+    user.save()
     return render(request, 'timeline.html', {
         'posts': posts,
         'user': FBUser.objects.get(id=request.user.id),
@@ -116,33 +123,31 @@ def show_timeline(request):
     })
 
 def add_comment(request):
-    print("addComment")
     if request.method == "POST":
-        print(request.body.decode('ascii'))
-        print(json.loads(request.body.decode('ascii')))
         data = json.loads(request.body.decode('ascii'))
         comment = data['comment']
         postId = data['postId']
-        print(comment)
-        print(postId)
         user = FBUser.objects.get(id=request.user.id)
-        newComment = Comment(commenter=user, post=Post.objects.get(id=postId), content=comment)
+        newComment = Comment(commenter=user, post=Post.objects.get(id=postId), content=comment, pub_date=datetime.now().replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Asia/Tehran")))
         newComment.save()
         res = {
             'commenter': user.username,
             'content': comment,
-            'pubDate': newComment.pub_date.strftime('%m/%d/%Y'),
+            'pubDate': newComment.pub_date.strftime("%d/%m/%Y"),
         }
         return HttpResponse(json.dumps(res), content_type="application/json")
     
-def get_comments(request, lastget):
-    comments = Comment.objects.all().filter(pub_date__gte=lastget)
+def get_comments(request):
+    user = FBUser.objects.get(id=request.user.id)
+    comments = Comment.objects.all().filter(post__poster__followers=user).filter(pub_date__gte=user.lastget)
+    user.lastget = datetime.now().replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Asia/Tehran"))
+    user.save()
     res = {}
     for comment in comments:
         res[comment.post.id] = {
-            'commenter': comment.commenter,
+            'commenter': comment.commenter.username,
             'content': comment.content,
-            'pubDate': comment.pub_date,
+            'pubDate': comment.pub_date.strftime("%d/%m/%y"),
         }
     return HttpResponse(json.dumps(res), content_type="application/json")
 

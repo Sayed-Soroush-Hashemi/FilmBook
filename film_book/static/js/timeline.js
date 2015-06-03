@@ -61,15 +61,11 @@ function closeComment(el){
     document.querySelector('#preventDiv').style.display = "none";
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
-	getcoms()
-/*	console.log(xhr.response);
 	if(xhr.readyState != 4 || xhr.status != 200) 
 	    return ;
 	if(xhr.readyState === 4){
-	    var res = JSON.parse(xhr.responseText);
-	    comments = document.querySelector("#post_" + el.parentNode.postId + " .comments");
-	    comments.innerHTML += "<div class='comment'><span class='commenter'>" + res.commenter + ": </span> " + res.content + "<span>" + res.pubDate + "</span></div>";
-	}*/
+	    setTimeout(getcoms, 500);
+	}
     }
     xhr.open('POST', '/addcomment');
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -79,7 +75,6 @@ function closeComment(el){
 	'postId': el.parentNode.postId,
     };
     xhr.send(JSON.stringify(data));
-    console.log(JSON.stringify(data));
 }
 
 function cancelComment(){
@@ -88,13 +83,12 @@ function cancelComment(){
     document.querySelector('#preventDiv').style.display = "none";    
 }
 
-setInterval(getcoms, 3000);
+setInterval(getcoms, 10000);
 
 function getcoms(){
-    console.log("getting...");
+    console.log("getting coms...");
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
-	console.log(xhr.responseText);
 	if(xhr.readyState != 4 || xhr.status != 200) 
 	    return ;
 	if(xhr.readyState === 4){
@@ -105,8 +99,6 @@ function getcoms(){
 	    }
 	}
     }
-    var date = new Date()
-    var formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    xhr.open('GET', '/getcomments/' + formattedDate);
+    xhr.open('GET', '/getcomments/');
     xhr.send(null);
 }
