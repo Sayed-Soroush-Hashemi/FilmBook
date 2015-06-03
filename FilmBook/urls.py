@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^movie/(\d+)', 'film_book.views.show_movie'),
     url(r'^post/(\d+)', 'film_book.views.show_post'),
     url(r'^timeline', 'film_book.views.show_timeline'),
-
+    url(r'^addcomment', 'film_book.views.add_comment'),
+    
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -1,5 +1,6 @@
 from users.models import FBUser
 from django.db import models
+import datetime
 
 class Movie(models.Model):
     name = models.CharField(max_length=100)
@@ -24,7 +25,7 @@ class Post(models.Model):
     poster = models.ForeignKey(FBUser)
     rate = models.ForeignKey(Rate)
     review = models.TextField()
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(default=datetime.datetime.now())
 
     def __str__(self):
         return "{} has written review on {}".format(self.poster, self.movie)
@@ -33,7 +34,7 @@ class Comment(models.Model):
     commenter = models.ForeignKey(FBUser)
     post = models.ForeignKey(Post)
     content = models.TextField()
-    pub_date = models.DateTimeField()
+    pub_date = models.DateTimeField(default=datetime.datetime.now())
 
     def __str__(self):
         return "{} says: {}".format(self.commenter, self.content)

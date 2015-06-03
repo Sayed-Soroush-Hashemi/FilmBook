@@ -5,47 +5,65 @@
     <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <script src="{% static 'js/timeline.js' %}"></script>
   </head>
   
   <body>
     <aside>
     </aside>
-    
+
+    <div id="commentForm">
+      <form>
+	<p>
+	  <label>Comment Here:</label>
+	  <textarea></textarea>
+	</p>
+      </form>
+      <button onclick="closeComment(this)">Comment</button>
+    </div>    
+
     <section id="container">
+      <form action="" method="POST" id="newPost">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<p>
+	  <label for="rating">Rate This Movie</label>
+	  <select name="rating" form="newPost">
+	    <option value="1">1</option>
+	    <option value="2">2</option>
+	    <option value="3">3</option>
+	    <option value="4">4</option>
+	    <option value="5">5</option>
+	  </select>
+	</p> <p>
+	<input type="submit" value="Share Review"> </p>
+      </form>
       {% for post in posts %}
-      <article class="box">
+      <article id="{{post.id}}" class="box">
 	<section class="details"> 
-	  <img class="user-pic" src="{% static 'images/user-sample.jpg' %}">
-	  <i class="fa fa-thumbs-o-up"></i><br>
-	  <i class="fa fa-external-link"></i><br>
-	  <i class="fa fa-volume-off"></i><br>
-	  <h2 class="username"> Alireza Nasri </h2>
-	  <h2> Leon the Professional </h2>
-	  <h2> Rating: 3 </h2>
+	  <img class="user-pic" src="/static/{{user.image.url}}">
+	  <i onclick="likePost(post.id)" class="fa fa-thumbs-o-up"></i><br>
+	  <i onclick="openPost({{post.id}})" class="fa fa-external-link"></i><br>
+	  <i onclick="mute({{post.poster.username}})" class="fa fa-volume-off"></i><br>
+	  <i onclick="openComment('{{post.movie.image.url}}')" class="fa fa-comment-o"></i><br>
+	  <h2 class="username"> {{user.username}} </h2>
+	  <h2> {{post.movie.name}} </h2>
+	  <h2> Rating: {{post.rate.rate}} </h2>
 	</section>
-	<section class="post">This is a text. This is a text. This
-	  is a text. This is a text. This is a text. This is a text. This is
-	  a text. This is a text. This is a text. This is a text. This is a
-	  text. This is a text. This is a text. This is a text. This is a
-	  text. This is a text. This is a text. This is a text. This is a
-	  text. This is a text. This is a text. This is a text. This is a</section>
+	<section class="post">{{post.review}}</section>
 	<section class="comments"> 
 	  <div class="info rot">COMMENTS</div>
+	  {% for comment in comments.post.index %}
 	  <div class="comment">
-	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a comm
+	    <span class="commenter">{{comment.commenter}}: </span> {{comment.content}}<span>{{comment.pub_date}}</span>
 	  </div>
-
-	  <div class="comment">
-	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
-	  </div>
-
-	  <div class="comment">
-	    <span class="commenter">Alireza Nasri: </span> hi this is a comment hi this is a commenthi this is a commenthi this is a commenthi this is a comment:D
-	  </div>
+	  {% endfor %}
 	</section>
-	<img class="poster" src="{% static 'images/sample.jpg' %}">
+	<img class="poster" src="/static/{{post.movie.image.url}}">
       </article>
       {% endfor %}
     </section>
+    <div id="preventDiv" onclick="cancelComment()">
+    </div>
   </body>
 </html>

@@ -47,3 +47,37 @@ function hideMovieDetails(movieImageElement) {
 	var detailBoxElement = movieImageElement.nextElementSibling;
 	detailBoxElement.style.display = "none";
 }
+
+function openComment(imageUrl, post_id){
+    form = document.querySelector('#commentForm');
+    form.style.display = "block";
+    form.postId = post_id;
+    document.querySelector('#preventDiv').style.display = "block";
+}
+
+function closeComment(el){
+    form = document.querySelector('#commentForm');
+    form.style.display = "none";
+    document.querySelector('#preventDiv').style.display = "none";
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechanged = function(){
+	if(xhr.readyState != 4 || xhr.status != 200) 
+	    return ;
+	if(xhr.readyState === 4){
+	    var res = JSON.parse(xhr.responseText);
+	    comments = document.querySelector("#" + el.parentNode.postId + ".commets");
+	    comments.innerHTML += "<div class='comment'><span class='commenter'>" + res.commenter + ": </span> " + res.content + "<span>" + res.pubDate + "</span></div>";
+	}
+    }
+    xhr.open('POST', '/addcomment');
+    xhr.send({
+	'comment': el.parentNode.querySelector('textarea').value, 
+	'postId': el.parentNode.postId,
+    });
+}
+
+function cancelComment(){
+    form = document.querySelector('#commentForm');
+    form.style.display = "none";
+    document.querySelector('#preventDiv').style.display = "none";    
+}

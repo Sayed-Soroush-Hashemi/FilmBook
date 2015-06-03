@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from film_book.models import Movie, Post, Comment, Crew, Role, Rate
+from film_book.forms import NewPostForm
 from users.models import FBUser
 from django.core.urlresolvers import reverse
 
@@ -86,14 +87,41 @@ def user_following(request, user_id):
 def show_timeline(request):
     if request.user.is_authenticated() == False:
         return redirect(reverse('user_edit_profile'))
+
+    if request.method == "POST":
+        form = NewPostForm(request.POST)
+        
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.poster = FBUser.objects.get(id=request.user.id)
+            rate = Rate(movie=Movie.objects.get(id=request.POST.get('movie', None)), user=FBUser.objects.get(id=request.user.id), rate=request.POST.get('rating', 0))
+            rate.save()
+            post.rate = rate
+            post.save()
+            form = NewPostForm()
+    else:
+        form = NewPostForm()    
     user = request.user
     posts = Post.objects.all().filter(poster__followers=user)
-#    posts = []
-#    for post in tmpposts:
-#        if post.poster.followers.contains(user):
-#            posts.push(post)
-        
+    comments = []
+    for post in posts:
+        comments.append(Comment.objects.all().filter(post=post))
     return render(request, 'timeline.html', {
         'posts': posts,
-        'user': user,
+        'user': FBUser.objects.get(id=request.user.id),
+        'form': form,
+        'comments': comments,
     })
+
+def add_comment(request):
+    print("addComment")
+    if request.method == "POST":
+        comment = request.POST.get('comment', '');
+        postId = request.POST.get('postId', '');
+        user = FBUser.objects.get(id=request.user.id)
+        newComment = Comment(commenter=user, post=Post.objects.get(id=postId), content=comment)
+        newComment.save()
+        return "{'commenter': {}, 'content': {}, 'pubDate': {}}".format(user.username, comment, newComment.pub_date)
+    else:
+        return redirect(reverse('user_edit_profile'))
+    
