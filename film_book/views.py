@@ -93,8 +93,7 @@ def show_timeline(request):
         return redirect(reverse('user_edit_profile'))
 
     if request.method == "POST":
-        form = NewPostForm(request.POST)
-        
+        form = NewPostForm(request.POST)        
         if form.is_valid():
             post = form.save(commit=False)
             post.poster = FBUser.objects.get(id=request.user.id)
@@ -107,19 +106,10 @@ def show_timeline(request):
         form = NewPostForm()    
     user = FBUser.objects.get(id=request.user.id)
     posts = Post.objects.all().filter(poster__followers=user)
-    comments = []
-    for post in posts:
-        comments.append({
-            'post': post,
-            'comment': Comment.objects.all().filter(post=post),
-        })
-    user.lastget = datetime.now().replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Asia/Tehran"))
-    user.save()
     return render(request, 'timeline.html', {
         'posts': posts,
         'user': FBUser.objects.get(id=request.user.id),
         'form': form,
-        'comments': comments,
     })
 
 def add_comment(request):
@@ -137,17 +127,21 @@ def add_comment(request):
         }
         return HttpResponse(json.dumps(res), content_type="application/json")
     
-def get_comments(request):
+def get_comments(request, all):
     user = FBUser.objects.get(id=request.user.id)
-    comments = Comment.objects.all().filter(post__poster__followers=user).filter(pub_date__gte=user.lastget)
+    if all == "true":
+        comments = Comment.objects.all()
+        print(comments)
+    else:
+        comments = Comment.objects.all().filter(post__poster__followers=user).filter(pub_date__gte=user.lastget)
     user.lastget = datetime.now().replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Asia/Tehran"))
     user.save()
     res = {}
     for comment in comments:
-        res[comment.post.id] = {
+        res["{}_{}".format(comment.post.id , comment.id)] = {
             'commenter': comment.commenter.username,
             'content': comment.content,
-            'pubDate': comment.pub_date.strftime("%d/%m/%y"),
+            'pubDate': comment.pub_date.replace(tzinfo=pytz.utc).astimezone(pytz.timezone("Asia/Tehran")).strftime("%d/%m/%y %H:%M"),
         }
     return HttpResponse(json.dumps(res), content_type="application/json")
 

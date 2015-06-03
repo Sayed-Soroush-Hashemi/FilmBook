@@ -83,9 +83,12 @@ function cancelComment(){
     document.querySelector('#preventDiv').style.display = "none";    
 }
 
+getcoms(true)
 setInterval(getcoms, 10000);
 
-function getcoms(){
+function getcoms(all){
+    if(!all)
+	all = false;
     console.log("getting coms...");
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
@@ -94,11 +97,11 @@ function getcoms(){
 	if(xhr.readyState === 4){
 	    var res = JSON.parse(xhr.responseText);
 	    for(key in res){
-		comments = document.querySelector("#post_" + key + " .comments");
+		comments = document.querySelector("#post_" + key.split("_")[0] + " .comments");
 		comments.innerHTML += "<div class='comment'><span class='commenter'>" + res[key]['commenter'] + ": </span> " + res[key]['content'] + "<span>" + res[key]['pubDate'] + "</span></div>";
 	    }
 	}
     }
-    xhr.open('GET', '/getcomments/');
+    xhr.open('GET', '/getcomments/' + all);
     xhr.send(null);
 }

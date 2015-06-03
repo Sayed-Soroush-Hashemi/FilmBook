@@ -37,31 +37,23 @@
 	</p> <p>
 	<input type="submit" value="Share Review"> </p>
       </form>
-      {% regroup comments by post as comment_list %}
-      {% for postgroup in comment_list %}
-      <article id="post_{{postgroup.grouper.id}}" class="box">
+      {% for post in posts %}
+      <article id="post_{{post.id}}" class="box">
 	<section class="details"> 
 	  <img class="user-pic" src="/static/{{user.image.url}}">
-	  <i onclick="likePost(postgroup.grouper.id)" class="fa fa-thumbs-o-up"></i><br>
-	  <i onclick="openPost({{postgroup.grouper.id}})" class="fa fa-external-link"></i><br>
-	  <i onclick="mute({{postgroup.grouper.poster.username}})" class="fa fa-volume-off"></i><br>
-	  <i onclick="openComment('{{postgroup.grouper.movie.image.url}}', {{postgroup.grouper.id}})" class="fa fa-comment-o"></i><br>
+	  <i onclick="likePost({{post.id}})" class="fa fa-thumbs-o-up"></i><br>
+	  <i onclick="openPost({{post.id}})" class="fa fa-external-link"></i><br>
+	  <i onclick="mute({{post.poster.username}})" class="fa fa-volume-off"></i><br>
+	  <i onclick="openComment('{{post.movie.image.url}}', {{post.id}})" class="fa fa-comment-o"></i><br>
 	  <h2 class="username"> {{user.username}} </h2>
-	  <h2> {{postgroup.grouper.movie.name}} </h2>
-	  <h2> Rating: {{postgroup.grouper.rate.rate}} </h2>
+	  <h2> {{post.movie.name}} </h2>
+	  <h2> Rating: {{post.rate.rate}} </h2>
 	</section>
-	<section class="post">{{postgroup.grouper.review}}</section>
+	<section class="post">{{post.review}}</section>
 	<section class="comments"> 
 	  <div class="info rot">COMMENTS</div>
-	  {% for item in postgroup.list %}
-	  {% for comment in item.comment %}
-	  <div class="comment">
-	    <span class="commenter">{{comment.commenter}}: </span> {{comment.content}}<span>{{comment.pub_date}}</span>
-	  </div>
-	  {% endfor %}
-	  {% endfor %}
 	</section>
-	<img class="poster" src="/static/{{postgroup.grouper.movie.image.url}}">
+	<img class="poster" src="/static/{{post.movie.image.url}}">
       </article>
       {% endfor %}
     </section>
