@@ -60,24 +60,53 @@ function closeComment(el){
     form.style.display = "none";
     document.querySelector('#preventDiv').style.display = "none";
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechanged = function(){
+    xhr.onreadystatechange = function(){
+	getcoms()
+/*	console.log(xhr.response);
 	if(xhr.readyState != 4 || xhr.status != 200) 
 	    return ;
 	if(xhr.readyState === 4){
 	    var res = JSON.parse(xhr.responseText);
-	    comments = document.querySelector("#" + el.parentNode.postId + ".commets");
+	    comments = document.querySelector("#post_" + el.parentNode.postId + " .comments");
 	    comments.innerHTML += "<div class='comment'><span class='commenter'>" + res.commenter + ": </span> " + res.content + "<span>" + res.pubDate + "</span></div>";
-	}
+	}*/
     }
     xhr.open('POST', '/addcomment');
-    xhr.send({
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRFToken', csrf);
+    var data = {
 	'comment': el.parentNode.querySelector('textarea').value, 
 	'postId': el.parentNode.postId,
-    });
+    };
+    xhr.send(JSON.stringify(data));
+    console.log(JSON.stringify(data));
 }
 
 function cancelComment(){
     form = document.querySelector('#commentForm');
     form.style.display = "none";
     document.querySelector('#preventDiv').style.display = "none";    
+}
+
+setInterval(getcoms, 3000);
+
+function getcoms(){
+    console.log("getting...");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+	console.log(xhr.responseText);
+	if(xhr.readyState != 4 || xhr.status != 200) 
+	    return ;
+	if(xhr.readyState === 4){
+	    var res = JSON.parse(xhr.responseText);
+	    for(key in res){
+		comments = document.querySelector("#post_" + key + " .comments");
+		comments.innerHTML += "<div class='comment'><span class='commenter'>" + res[key]['commenter'] + ": </span> " + res[key]['content'] + "<span>" + res[key]['pubDate'] + "</span></div>";
+	    }
+	}
+    }
+    var date = new Date()
+    var formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    xhr.open('GET', '/getcomments/' + formattedDate);
+    xhr.send(null);
 }

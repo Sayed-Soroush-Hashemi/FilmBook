@@ -87,6 +87,10 @@ aside{
     border-radius: 0 5px 0 0;
 }
 
+.box .comments span{
+    float: right;
+}
+
 .box .details{
     padding: 8px;
     margin: 0;
@@ -334,3 +338,4 @@ aside{
     background-color: #555;
     opacity: 0.5;
 }
+

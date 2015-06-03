@@ -3,6 +3,8 @@ from film_book.models import Movie, Post, Comment, Crew, Role, Rate
 from film_book.forms import NewPostForm
 from users.models import FBUser
 from django.core.urlresolvers import reverse
+import json
+from django.http import HttpResponse
 
 def show_movie(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
@@ -116,12 +118,31 @@ def show_timeline(request):
 def add_comment(request):
     print("addComment")
     if request.method == "POST":
-        comment = request.POST.get('comment', '');
-        postId = request.POST.get('postId', '');
+        print(request.body.decode('ascii'))
+        print(json.loads(request.body.decode('ascii')))
+        data = json.loads(request.body.decode('ascii'))
+        comment = data['comment']
+        postId = data['postId']
+        print(comment)
+        print(postId)
         user = FBUser.objects.get(id=request.user.id)
         newComment = Comment(commenter=user, post=Post.objects.get(id=postId), content=comment)
         newComment.save()
-        return "{'commenter': {}, 'content': {}, 'pubDate': {}}".format(user.username, comment, newComment.pub_date)
-    else:
-        return redirect(reverse('user_edit_profile'))
+        res = {
+            'commenter': user.username,
+            'content': comment,
+            'pubDate': newComment.pub_date.strftime('%m/%d/%Y'),
+        }
+        return HttpResponse(json.dumps(res), content_type="application/json")
     
+def get_comments(request, lastget):
+    comments = Comment.objects.all().filter(pub_date__gte=lastget)
+    res = {}
+    for comment in comments:
+        res[comment.post.id] = {
+            'commenter': comment.commenter,
+            'content': comment.content,
+            'pubDate': comment.pub_date,
+        }
+    return HttpResponse(json.dumps(res), content_type="application/json")
+
