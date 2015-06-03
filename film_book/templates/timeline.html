@@ -41,7 +41,7 @@
       <article id="post_{{post.id}}" class="box">
 	<section class="details"> 
 	  <img class="user-pic" src="/static/{{user.image.url}}">
-	  <i onclick="likePost({{post.id}})" class="fa fa-thumbs-o-up"></i><br>
+	  <i onclick="likePost({{post.id}}, this)" class="fa fa-thumbs-o-up"></i><br>
 	  <i onclick="openPost({{post.id}})" class="fa fa-external-link"></i><br>
 	  <i onclick="mute({{post.poster.username}})" class="fa fa-volume-off"></i><br>
 	  <i onclick="openComment('{{post.movie.image.url}}', {{post.id}})" class="fa fa-comment-o"></i><br>

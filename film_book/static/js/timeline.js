@@ -75,6 +75,7 @@ function closeComment(el){
 	'postId': el.parentNode.postId,
     };
     xhr.send(JSON.stringify(data));
+    el.parentNode.querySelector('textarea').value = "";
 }
 
 function cancelComment(){
@@ -104,4 +105,12 @@ function getcoms(all){
     }
     xhr.open('GET', '/getcomments/' + all);
     xhr.send(null);
+}
+
+function openPost(id){
+    window.location = "/post/" + id;
+}
+
+function likePost(id){
+    
 }
